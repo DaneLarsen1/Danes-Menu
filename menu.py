@@ -1,49 +1,19 @@
 # Menu dictionary
 menu = {
-    "Snacks": {
-        "Cookie": .99,
-        "Banana": .69,
-        "Apple": .49,
-        "Granola bar": 1.99
+    "Snacks": { "Cookie": .99, "Banana": .69, "Apple": .49, "Granola bar": 1.99
     },
-    "Meals": {
-        "Burrito": 4.49,
-        "Teriyaki Chicken": 9.99,
-        "Sushi": 7.49,
-        "Pad Thai": 6.99,
-        "Pizza": {
-            "Cheese": 8.99,
-            "Pepperoni": 10.99,
-            "Vegetarian": 9.99
-        },
-        "Burger": {
-            "Chicken": 7.49,
-            "Beef": 8.49
-        }
+    "Meals": { "Burrito": 4.49, "Teriyaki Chicken": 9.99, "Sushi": 7.49, "Pad Thai": 6.99, 
+    "Pizza": { "Cheese": 8.99, "Pepperoni": 10.99, "Vegetarian": 9.99 },
+    "Burger": { "Chicken": 7.49, "Beef": 8.49 }
     },
+
     "Drinks": {
-        "Soda": {
-            "Small": 1.99,
-            "Medium": 2.49,
-            "Large": 2.99
-        },
-        "Tea": {
-            "Green": 2.49,
-            "Thai iced": 3.99,
-            "Irish breakfast": 2.49
-        },
-        "Coffee": {
-            "Espresso": 2.99,
-            "Flat white": 2.99,
-            "Iced": 3.49
-        }
+        "Soda": { "Small": 1.99, "Medium": 2.49, "Large": 2.99 },
+        "Tea": { "Green": 2.49, "Thai iced": 3.99, "Irish breakfast": 2.49 },
+        "Coffee": { "Espresso": 2.99, "Flat white": 2.99, "Iced": 3.49}
     },
-    "Dessert": {
-        "Chocolate lava cake": 10.99,
-        "Cheesecake": {
-            "New York": 4.99,
-            "Strawberry": 6.49
-        },
+    "Dessert": { "Chocolate lava cake": 10.99,
+        "Cheesecake": { "New York": 4.99, "Strawberry": 6.49 },
         "Australian Pavlova": 9.99,
         "Rice pudding": 4.99,
         "Fried banana": 4.49
@@ -52,7 +22,7 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-
+order = []
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
@@ -118,31 +88,42 @@ while place_order:
                     }
                     i += 1
             # 2. Ask customer to input menu item number
-
+            menu_item_choice = input("Type the item number you wish to order: ")
 
             # 3. Check if the customer typed a number
-
+            if menu_item_choice.isdigit():
                 # Convert the menu selection to an integer
-
+                menu_item_number = int(menu_item_choice)
 
                 # 4. Check if the menu selection is in the menu items
-
+                if menu_item_number in menu_items:
                     # Store the item name as a variable
-
+                    item_name = menu_items[menu_item_number]["Item name"]
+                    item_price = menu_items[menu_item_number]["Price"]
 
                     # Ask the customer for the quantity of the menu item
-
+                    quantity = input(f"How many {item_name} would you like to order? ")
 
                     # Check if the quantity is a number, default to 1 if not
-
-
+                    if quantity.isdigit():
+                        quantity = int(quantity)
+                    else:
+                        print("Invalid quantity entered. Defaulting to 1.")
+                        quantity = 1
+                    
                     # Add the item name, price, and quantity to the order list
-
-
+                    order.append({
+                        "Item name": item_name,
+                        "Price": item_price,
+                        "Quantity": quantity
+                    })
+                    print(f"Added {quantity} x {item_name} to your order.")
+                else:
                     # Tell the customer that their input isn't valid
-
-
-                # Tell the customer they didn't select a menu option
+                    print("Invalid menu item number selected.")
+            else:
+                # Tell the customer they didn't select a number
+                print("You didn't select a valid number.")
 
         else:
             # Tell the customer they didn't select a menu option
